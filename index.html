@@ -17,14 +17,14 @@
         if (e.keyCode == 13) {
           var name = $('#nameInput').val();
           var text = $('#messageInput').val();
-          messages.push({name: name, text: text});
+          messages.push({ name: name, text: text });
           $('#messageInput').val('');
         }
       });
 
       $('#nameInput').keyup(function(e) {
         nameRef.update({ first : $('#nameInput').val() });
-      })
+      });
 
       messages.on('child_added', function(snapshot) {
         var message = snapshot.val();
@@ -37,20 +37,16 @@
       };
 
       var nameRef;
-
       var auth = new FirebaseSimpleLogin(bomb, function(error, user) {
         if (error) {
           // an error occurred while attempting login
           console.log(error);
         } else if (user) {
           // user authenticated with Firebase
-          // console.log('User ID: ' + user.id + ', Provider: ' + user.provider);
-          // $('#nameInput').val(user.id);
           nameRef = users.child(user.id + '/name');
           nameRef.on('value', function(snapshot) {
             $('#nameInput').val(snapshot.val().first);
           });
-          // nameRef.child('first').set($('#nameInput').val());
         } else {
           // user is logged out
           auth.login('anonymous', {
@@ -58,9 +54,6 @@
           });
         }
       });
-
-
-
     </script>
   </body>
 </html>
