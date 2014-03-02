@@ -1,0 +1,7 @@
+firebase-chat
+=============
+
+License
+=======
+
+MIT
