@@ -9,9 +9,12 @@
     <input type='text' id='messageInput' placeholder='Message'>
     <div id="messagesDiv"></div>
     <script type="text/javascript">
-      var bomb = new Firebase('https://bomb.firebaseio.com/');
-      var messages = bomb.child('messages');
-      var users = bomb.child('users');
+      /* Change me! */
+      var firebase_url = 'https://example.firebaseio.com/';
+
+      var fireRoute = new Firebase(firebase_url);
+      var messages = fireRoute.child('messages');
+      var users = fireRoute.child('users');
 
       $('#messageInput').keypress(function (e) {
         if (e.keyCode == 13) {
@@ -37,7 +40,7 @@
       };
 
       var nameRef;
-      var auth = new FirebaseSimpleLogin(bomb, function(error, user) {
+      var auth = new FirebaseSimpleLogin(fireRoute, function(error, user) {
         if (error) {
           // an error occurred while attempting login
           console.log(error);
